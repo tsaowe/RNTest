@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
             width:0,
             height:0
         },
-        shadowRadius:1,
+        shadowRadius:2,
         shadowOpacity:.3
     },
     text: {
@@ -65,8 +65,18 @@ const styles = StyleSheet.create({
     touchable:{
     },
     touchableHighLight:{
-        borderBottomWidth:1,
-        borderBottomColor:colors.JMRed
+        //borderBottomWidth:2,
+        //borderBottomColor:colors.JMRed
+    },
+    container:{
+        height:31
+    },
+    animationLine:{
+        borderBottomWidth:2,
+        borderBottomColor:colors.JMRed,
+        position:'absolute',
+        top:22,
+        transform: [{'translate':[0,0,1]}]
     }
 });
 
@@ -76,7 +86,9 @@ var Component = React.createClass({
         return {
             active: 0,
             width: [],
-            x: []
+            x: [],
+            left:0,
+            lineWidth:30
         }
     },
     setActive: function (index) {
@@ -93,7 +105,7 @@ var Component = React.createClass({
     ,
     render: function () {
         return (
-            <View style={{height:30}}>
+            <View style={styles.container}>
                 <ScrollView
                     ref="scrollView"
                     automaticallyAdjustContentInsets={false}
@@ -124,6 +136,7 @@ var Component = React.createClass({
                             </TouchableOpacity>
                         );
                     }.bind(this))}
+                    <View style={[styles.animationLine,{width:this.state.lineWidth,left:this.state.left}]}/>
                 </ScrollView>
             </View>
         );
