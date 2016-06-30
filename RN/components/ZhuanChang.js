@@ -11,7 +11,8 @@ let {
     ListView,
     StyleSheet,
     Dimensions,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 } = ReactNative;
 
 import Piaochuang from './piaochuang';
@@ -49,11 +50,12 @@ const goTopStyles = StyleSheet.create({
 export default React.createClass({
 
     getInitialState: function () {
-        var ds = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 !== r2
-        });
         return {
-            dataSource: ds.cloneWithRows(this._genRows({})),
+            dataSource: new ListView.DataSource({
+                rowHasChanged: (r1, r2) => r1 !== r2
+            }).cloneWithRows(
+                this._genRows({})
+            ),
             top: 0
         };
     },
@@ -65,6 +67,7 @@ export default React.createClass({
                 <Piaochuang />
                 <ListView
                     ref="list"
+                    scrollEventThrottle={2}
                     contentContainerStyle={listViewStyles.list}
                     dataSource={this.state.dataSource}
                     initialListSize={21}
@@ -73,14 +76,20 @@ export default React.createClass({
                     renderRow={this._renderRow}
                     onScroll={this.handleScroll}
                 />
-                <TouchableOpacity
-                    onPress={this.handleScrollTop}
-                    activeOpacity={.7}>
-                    <View style={[goTopStyles.container,goTopStyles.image]}>
-                        <Image style={goTopStyles.image}
-                               source={{uri:'http://mp3.jmstatic.com/q_80/jm_img/gotop.png'}}/>
-                    </View>
-                </TouchableOpacity>
+                {
+                    this.state.top > 50 ? (
+                        <TouchableOpacity
+                            onPress={this.handleScrollTop}
+                            activeOpacity={.7}>
+                            <View style={[goTopStyles.container,goTopStyles.image]}>
+                                <Image style={goTopStyles.image}
+                                       source={{uri:'http://mp3.jmstatic.com/q_80/jm_img/gotop.png'}}/>
+                            </View>
+                        </TouchableOpacity>
+                    ) : null
+                }
+                
+                
             </View>
         );
     },
@@ -90,8 +99,9 @@ export default React.createClass({
         });
     },
     handleScroll: function (event) {
+        let top = event.nativeEvent.contentOffset.y;
         this.setState(function (state) {
-            state.top = event.nativeEvent.contentOffset.y;
+            state.top = top ;
         });
     },
     _renderRow: function () {
