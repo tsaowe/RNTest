@@ -3,7 +3,7 @@
  */
 var React = require('react');
 var ReactNative = require('react-native');
-let {ScrollView, Text, StyleSheet, View, TouchableOpacity, Alert,Dimensions,StatusBar,Animated,LayoutAnimation} = ReactNative;
+let {ScrollView, Text, StyleSheet, View, TouchableOpacity, Alert, Dimensions, StatusBar, Animated, LayoutAnimation} = ReactNative;
 
 const list = [
     '首页',
@@ -22,18 +22,16 @@ import colors from '../common/color';
 let {height, width} = Dimensions.get('window');
 
 
-
-
-const generateX = (windowWidth,widths,Xs,index)=>{
+const generateX = (windowWidth, widths, Xs, index)=> {
     let maxX = widths.reduce((a, b)=>(a + b)) - windowWidth;
     let minX = 0;
     let currentElementCenterX = Xs[index] + widths[index] / 2;
     let elementScrollX = currentElementCenterX - windowWidth / 2;
     let left = elementScrollX;
-    if(elementScrollX < minX){
+    if (elementScrollX < minX) {
         left = 0;
     }
-    if(elementScrollX > maxX){
+    if (elementScrollX > maxX) {
         left = maxX;
     }
     return left;
@@ -44,39 +42,38 @@ const styles = StyleSheet.create({
     scrollView: {
         backgroundColor: '#f9f9f9',
         paddingTop: 7,
-        shadowColor:'#000',
-        shadowOffset:{
-            width:0,
-            height:0
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 0
         },
-        shadowRadius:2,
-        shadowOpacity:.3
+        shadowRadius: 2,
+        shadowOpacity: .3
     },
     text: {
         fontSize: 15,
         color: '#838383',
-        height:22
+        height: 22
 
     },
     innerView: {
         paddingLeft: 10,
         paddingRight: 10
     },
-    touchable:{
-    },
-    touchableHighLight:{
+    touchable: {},
+    touchableHighLight: {
         //borderBottomWidth:2,
         //borderBottomColor:colors.JMRed
     },
-    container:{
-        height:31
+    container: {
+        height: 31
     },
-    animationLine:{
-        borderBottomWidth:2,
-        borderBottomColor:colors.JMRed,
-        position:'absolute',
-        top:22,
-        transform: [{'translate':[0,0,1]}]
+    animationLine: {
+        borderBottomWidth: 2,
+        borderBottomColor: colors.JMRed,
+        position: 'absolute',
+        top: 22,
+        transform: [{'translate': [0, 0, 1]}]
     }
 });
 
@@ -87,8 +84,8 @@ var Component = React.createClass({
             active: 0,
             width: [],
             x: [],
-            left:10,
-            lineWidth:30
+            left: 10,
+            lineWidth: 30
         }
     },
     setActive: function (index) {
@@ -98,7 +95,7 @@ var Component = React.createClass({
 
         setTimeout(function () {
             this.refs.scrollView.scrollTo({
-                x: generateX(width,this.state.width,this.state.x,index)
+                x: generateX(width, this.state.width, this.state.x, index)
             });
         }.bind(this), 10);
 
@@ -106,8 +103,8 @@ var Component = React.createClass({
         let currentLeft = this.state.x[index] + 10;
         let currentWidth = this.state.width[index] - 20;
         this.setState({
-            lineWidth:currentWidth,
-            left :currentLeft
+            lineWidth: currentWidth,
+            left: currentLeft
         });
 
 
@@ -151,19 +148,19 @@ var Component = React.createClass({
             </View>
         );
     },
-    componentDidMount:function () {
-        var timer = setInterval(()=>{
-            if(this.state.x[this.state.active] != undefined){
+    componentDidMount: function () {
+        var timer = setInterval(()=> {
+            if (this.state.x[this.state.active] != undefined) {
                 clearInterval(timer);
                 let currentLeft = this.state.x[this.state.active] + 10;
                 let currentWidth = this.state.width[this.state.active] - 20;
                 this.setState({
-                    lineWidth:currentWidth,
-                    left :currentLeft
+                    lineWidth: currentWidth,
+                    left: currentLeft
                 });
-                LayoutAnimation.spring(); 
+                LayoutAnimation.spring();
             }
-        },10);
+        }, 10);
     }
 });
 export default Component;
