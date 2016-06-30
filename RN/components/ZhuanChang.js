@@ -18,10 +18,8 @@ import Piaochuang from './piaochuang';
 import Product from './product';
 
 
-let { width} = Dimensions.get('window');
+let {width} = Dimensions.get('window');
 let goTopWidth = width / 6;
-
-
 
 
 const listViewStyles = StyleSheet.create({
@@ -40,14 +38,12 @@ const goTopStyles = StyleSheet.create({
         borderRadius: goTopWidth / 2
     },
     container: {
-        position:'absolute',
-        bottom:goTopWidth,
+        position: 'absolute',
+        bottom: goTopWidth,
         transform: [{'translate': [0, 0, 1]}],
-        right:goTopWidth * .6
+        right: goTopWidth * .6
     }
 });
-
-
 
 
 export default React.createClass({
@@ -57,10 +53,11 @@ export default React.createClass({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
         return {
-            dataSource: ds.cloneWithRows(this._genRows({}))
+            dataSource: ds.cloneWithRows(this._genRows({})),
+            top: 0
         };
     },
-    
+
     render: function () {
         return (
             <View style={{flex:1}}>
@@ -74,15 +71,28 @@ export default React.createClass({
                     pageSize={2}
                     scrollRenderAheadDistance={500}
                     renderRow={this._renderRow}
+                    onScroll={this.handleScroll}
                 />
                 <TouchableOpacity
+                    onPress={this.handleScrollTop}
                     activeOpacity={.7}>
                     <View style={[goTopStyles.container,goTopStyles.image]}>
-                        <Image style={goTopStyles.image} source={{uri:'http://mp3.jmstatic.com/q_80/jm_img/gotop.png'}}/>
+                        <Image style={goTopStyles.image}
+                               source={{uri:'http://mp3.jmstatic.com/q_80/jm_img/gotop.png'}}/>
                     </View>
                 </TouchableOpacity>
             </View>
         );
+    },
+    handleScrollTop: function () {
+        this.refs.list.scrollTo({
+            y: 0
+        });
+    },
+    handleScroll: function (event) {
+        this.setState(function (state) {
+            state.top = event.nativeEvent.contentOffset.y;
+        });
     },
     _renderRow: function () {
         return (
