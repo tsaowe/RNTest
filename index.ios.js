@@ -4,32 +4,10 @@
  * @flow
  */
 
-import React, {Component} from 'react';
 import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View,
-    StatusBar
+    AppRegistry
 } from 'react-native';
 
-import Pc from './RN/components/piaochuang';
-
-const jumeiapp = React.createClass({
-    render: function () {
-        return (
-            <View style={styles.container}>
-                <StatusBar hidden={true}/>
-                <Pc/>
-            </View>
-        );
-    }
-});
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    }
-});
+import jumeiapp from './RN/components/ZhuanChang';
 
 AppRegistry.registerComponent('jumeiapp', () => jumeiapp);

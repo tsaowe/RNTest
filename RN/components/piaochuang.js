@@ -3,7 +3,7 @@
  */
 var React = require('react');
 var ReactNative = require('react-native');
-let {ScrollView, Text, StyleSheet, View, TouchableOpacity, Alert, Dimensions, StatusBar, Animated, LayoutAnimation} = ReactNative;
+let {ScrollView, Text, StyleSheet, View, TouchableOpacity, Dimensions, LayoutAnimation} = ReactNative;
 
 const list = [
     '首页',
@@ -19,7 +19,7 @@ const list = [
 
 import colors from '../common/color';
 
-let {height, width} = Dimensions.get('window');
+let {width} = Dimensions.get('window');
 
 
 const generateX = (windowWidth, widths, Xs, index)=> {
@@ -66,14 +66,16 @@ const styles = StyleSheet.create({
         //borderBottomColor:colors.JMRed
     },
     container: {
-        height: 31
+        height: 31,
+        transform: [{'translate': [0, 0, 1]}]
     },
     animationLine: {
         borderBottomWidth: 2,
         borderBottomColor: colors.JMRed,
         position: 'absolute',
         top: 22,
-        transform: [{'translate': [0, 0, 1]}]
+        transform: [{'translate': [0, 0, 1]}],
+        borderRadius:1
     }
 });
 
@@ -160,7 +162,7 @@ var Component = React.createClass({
                 });
                 LayoutAnimation.spring();
             }
-        }, 10);
+        }, 100);
     }
 });
 export default Component;
