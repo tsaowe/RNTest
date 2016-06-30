@@ -48,11 +48,45 @@ const styles = StyleSheet.create({
     },
     container: {
         width: contentWidth,
-        height: contentWidth / widthCompareHeight,
+        height: contentWidth / widthCompareHeight + 2 * contentWidth / 4,
         marginTop: margin,
         marginBottom: margin
-        
-
+    },
+    titleAndPrice:{
+        height:2 * contentWidth / 4,
+        width:contentWidth,
+        justifyContent:'space-between'
+    },
+    textTitle:{
+        color:'#333',
+        fontSize:contentWidth / 11,
+        position:'relative',
+        top:5
+    },
+    priceView:{
+        position:'relative',
+        justifyContent:'flex-start',
+        flexDirection:'row',
+        alignItems:'flex-end'
+    },
+    textPrice:{
+        color:'#333',
+        fontSize:contentWidth / 8
+    },
+    textPriceDelete:{
+        color:'#999',
+        fontSize:contentWidth / 15,
+        marginLeft:10,
+        textDecorationLine:'line-through',
+        position:'relative',
+        top:-3
+    },
+    titleView:{
+        flexDirection:'row',
+        flexWrap:'wrap'
+    },
+    bold:{
+        fontWeight:'bold'
     }
 });
 
@@ -60,7 +94,9 @@ const styles = StyleSheet.create({
 export default React.createClass({
     render: function () {
         return (
-            <TouchableHighlight>
+            <TouchableOpacity
+                onPress={Alert.alert.bind(this,'title','123')}
+            >
                 <View style={ styles.container }>
                     <Image
                         defaultSource={require('./Thumbnails/default.png')}
@@ -70,9 +106,18 @@ export default React.createClass({
                     <View style={styles.soldOut}>
                         <Text style={styles.soldOutText}>已抢光</Text>
                     </View>
-
+                    <View style={styles.titleAndPrice}>
+                        <Text style={styles.textTitle}>
+                            <Text style={[styles.bold]}>5.8折/</Text>
+                            预售商品嘲讽ing,孙曦干爽纸尿布M124片
+                        </Text>
+                        <View style={styles.priceView}>
+                            <Text style={styles.textPrice}>¥ 123.00</Text>
+                            <Text style={styles.textPriceDelete}>¥123.00</Text>
+                        </View>
+                    </View>
                 </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
         );
     }
 });

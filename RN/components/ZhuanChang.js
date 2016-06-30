@@ -21,6 +21,7 @@ import Product from './product';
 
 let {width} = Dimensions.get('window');
 let goTopWidth = width / 6;
+let showGoTopHeight  = 50;
 
 
 const listViewStyles = StyleSheet.create({
@@ -42,7 +43,8 @@ const goTopStyles = StyleSheet.create({
         position: 'absolute',
         bottom: goTopWidth,
         transform: [{'translate': [0, 0, 1]}],
-        right: goTopWidth * .6
+        right: goTopWidth * .6,
+        opacity:.9
     }
 });
 
@@ -59,7 +61,10 @@ export default React.createClass({
             top: 0
         };
     },
-
+    shouldComponentUpdate:function (props, state) {
+        return (this.state.top > 50 && state.top < 50 ) ||
+        (this.state.top < 50 && state.top > 50);
+    },
     render: function () {
         return (
             <View style={{flex:1}}>
@@ -77,7 +82,7 @@ export default React.createClass({
                     onScroll={this.handleScroll}
                 />
                 {
-                    this.state.top > 50 ? (
+                    this.state.top > showGoTopHeight ? (
                         <TouchableOpacity
                             onPress={this.handleScrollTop}
                             activeOpacity={.7}>
@@ -88,7 +93,7 @@ export default React.createClass({
                         </TouchableOpacity>
                     ) : null
                 }
-                
+
                 
             </View>
         );
