@@ -3,7 +3,7 @@
  */
 var React = require('react');
 var ReactNative = require('react-native');
-let {ScrollView, Text, StyleSheet, View, TouchableOpacity, Alert,Dimensions,StatusBar} = ReactNative;
+let {ScrollView, Text, StyleSheet, View, TouchableOpacity, Alert,Dimensions,StatusBar,Animated,LayoutAnimation} = ReactNative;
 
 const list = [
     '首页',
@@ -87,7 +87,7 @@ var Component = React.createClass({
             active: 0,
             width: [],
             x: [],
-            left:0,
+            left:10,
             lineWidth:30
         }
     },
@@ -101,6 +101,16 @@ var Component = React.createClass({
                 x: generateX(width,this.state.width,this.state.x,index)
             });
         }.bind(this), 10);
+
+        LayoutAnimation.easeInEaseOut();
+        let currentLeft = this.state.x[index] + 10;
+        let currentWidth = this.state.width[index] - 20;
+        this.setState({
+            lineWidth:currentWidth,
+            left :currentLeft
+        });
+
+
     }
     ,
     render: function () {
@@ -140,6 +150,20 @@ var Component = React.createClass({
                 </ScrollView>
             </View>
         );
+    },
+    componentDidMount:function () {
+        var timer = setInterval(()=>{
+            if(this.state.x[this.state.active] != undefined){
+                clearInterval(timer);
+                let currentLeft = this.state.x[this.state.active] + 10;
+                let currentWidth = this.state.width[this.state.active] - 20;
+                this.setState({
+                    lineWidth:currentWidth,
+                    left :currentLeft
+                });
+                LayoutAnimation.spring(); 
+            }
+        },10);
     }
 });
 export default Component;
