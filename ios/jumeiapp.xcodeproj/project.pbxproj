@@ -623,6 +623,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsaowe;
 				PRODUCT_NAME = jumeiapp;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -644,6 +645,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsaowe;
 				PRODUCT_NAME = jumeiapp;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

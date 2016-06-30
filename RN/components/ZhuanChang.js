@@ -18,9 +18,8 @@ let {
 import Piaochuang from './piaochuang';
 import Product from './product';
 
-
 let {width} = Dimensions.get('window');
-let goTopWidth = width / 6;
+let goTopWidth = width / 6 > 60 ? 60 : width / 6;
 let showGoTopHeight  = 50;
 
 
@@ -116,7 +115,7 @@ export default React.createClass({
     },
     _genRows: function () {
         var dataBlob = [];
-        for (var ii = 0; ii < 30; ii++) {
+        for (var ii = 0; ii < 100; ii++) {
             dataBlob.push(ii);
         }
         return dataBlob;
