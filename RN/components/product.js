@@ -7,6 +7,8 @@ let {ScrollView, Text, StyleSheet, View, TouchableOpacity, Alert, Image, Dimensi
 
 let {width} = Dimensions.get('window');
 
+import color from '../common/color';
+
 // 设定每行应该显示几个商品
 let columnNumber = width < 400 ? 2 : (width < 500 ? 3 : 4);
 
@@ -52,41 +54,44 @@ const styles = StyleSheet.create({
         marginTop: margin,
         marginBottom: margin
     },
-    titleAndPrice:{
-        height:2 * contentWidth / 4,
-        width:contentWidth,
-        justifyContent:'space-between'
+    titleAndPrice: {
+        height: 2 * contentWidth / 4,
+        width: contentWidth,
+        justifyContent: 'space-between'
     },
-    textTitle:{
-        color:'#333',
-        fontSize:contentWidth / 11,
-        position:'relative',
-        top:5
+    textTitle: {
+        color: '#333',
+        fontSize: contentWidth / 11,
+        position: 'relative',
+        top: 5
     },
-    priceView:{
-        position:'relative',
-        justifyContent:'flex-start',
-        flexDirection:'row',
-        alignItems:'flex-end'
+    priceView: {
+        position: 'relative',
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
+        alignItems: 'flex-end'
     },
-    textPrice:{
-        color:'#333',
-        fontSize:contentWidth / 8
+    textPrice: {
+        color: '#333',
+        fontSize: contentWidth / 8
     },
-    textPriceDelete:{
-        color:'#999',
-        fontSize:contentWidth / 15,
-        marginLeft:10,
-        textDecorationLine:'line-through',
-        position:'relative',
-        top:-3
+    textPriceDelete: {
+        color: '#999',
+        fontSize: contentWidth / 15,
+        marginLeft: 10,
+        textDecorationLine: 'line-through',
+        position: 'relative',
+        top: -3
     },
-    titleView:{
-        flexDirection:'row',
-        flexWrap:'wrap'
+    titleView: {
+        flexDirection: 'row',
+        flexWrap: 'wrap'
     },
-    bold:{
-        fontWeight:'bold'
+    bold: {
+        fontWeight: 'bold'
+    },
+    textRed: {
+        color: color.JMRed
     }
 });
 
@@ -108,7 +113,7 @@ export default React.createClass({
                     </View>
                     <View style={styles.titleAndPrice}>
                         <Text style={styles.textTitle}>
-                            <Text style={[styles.bold]}>5.8折/</Text>
+                            <Text style={[styles.bold,styles.textRed]}>5.8折/</Text>
                             预售商品嘲讽ing,孙曦干爽纸尿布M124片
                         </Text>
                         <View style={styles.priceView}>
