@@ -129,6 +129,7 @@ var Component = React.createClass({
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
                     horizontal={true}
+                    keyboardDismissMode="interactive"
                     style={[styles.scrollView]}>
                     {list.map(function (text, i) {
                         return (

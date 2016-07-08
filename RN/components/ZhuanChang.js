@@ -79,6 +79,7 @@ export default React.createClass({
                     scrollRenderAheadDistance={500}
                     renderRow={this._renderRow}
                     onScroll={this.handleScroll}
+                    removeClippedSubviews={true}
                 />
                 {
                     this.state.top > showGoTopHeight ? (
